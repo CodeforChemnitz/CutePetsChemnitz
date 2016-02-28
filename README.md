@@ -67,7 +67,7 @@ sudo service forever_cutepets start
 Adding a Cronjob:
 ```
 # Scrape shelters every 6 hours
-50 */6 * * *   root node /opt/CutePetsChemnitz/lib/cron.js
+50 */6 * * *   root node /opt/CutePetsChemnitz/API/lib/cron.js
 ```
 
 

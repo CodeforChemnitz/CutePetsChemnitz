@@ -135,9 +135,7 @@ get_tierschutzdata = ->
 get_data = ->
   Promise.all [get_tierschutzdata(), get_tierfreundedata()]
     .then (list_of_values) ->
-      console.log _.union.apply null, list_of_values
       data = JSON.stringify(_.union.apply(null, list_of_values))
-      console.log data
       cache.setAsync 'tiere', data
         .then ->
           cache.quit()
