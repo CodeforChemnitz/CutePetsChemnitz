@@ -14,23 +14,22 @@ Originally specific to Denver, it's been redeployed by a few cities. Check out [
 
 ## Setup & Deployment
 
-I've deployed it on my Raspberry PI running Rasbian ;)
+### nodejs
 
-Using user `pi`
-
-### iojs
-```
-cd ~
-wget https://iojs.org/dist/v2.3.4/iojs-v2.3.4-linux-armv6l.tar.xz
-tar xf iojs-v2.3.4-linux-armv6l.tar.xz
-export PATH=/home/pi/iojs-v2.3.4-linux-armv6l/bin:$PATH
-```
+[https://nodejs.org/](https://nodejs.org/en/)
 
 ### ruby
 ```
 sudo apt-get install ruby ruby-dev rake
 sudo gem install bundler
 ```
+
+### Redis
+```
+sudo apt-get install redis
+```
+
+Configure Redis in `src/server.coffee`
 
 ### Repo
 ```
@@ -47,21 +46,30 @@ The API is available via http://127.0.0.1:3000/
 ```
 cd API
 npm install
-npm run build
+npm run-script build
 ```
 
 #### Run
 ```
-node lib/scraper.js
+node lib/cron.js
+node lib/server.js
 ```
 
+
 #### Deploy
+Install Service
 ```
-sudo ln -s /opt/CutePetsChemnitz/API/petschemnitz /etc/init.d
-sudo update-rc.d petschemnitz defaults
-sudo mkdir /var/cache/petschemnitz
-sudo service petschemnitz start
+sudo ln -s /opt/CutePetsChemnitz/API/forever_cutepets /etc/init.d
+sudo update-rc.d forever_cutepets defaults
+sudo service forever_cutepets start
 ```
+
+Adding a Cronjob:
+```
+# Scrape shelters every 6 hours
+50 */6 * * *   root node /opt/CutePetsChemnitz/lib/cron.js
+```
+
 
 ### Twitter
 1. Create a new [twitter app](https://apps.twitter.com/).
@@ -85,9 +93,10 @@ rake
 ```
 
 #### Deploy
-Adding a cronjob:
+Adding a Cronjob:
 ```
-5 9-22/2 * * * root cd /opt/CutePetsChemnitz && rake
+# Post a pet every hour
+5 9-22/2 * * *  root cd /opt/CutePetsChemnitz && rake
 ```
 
 

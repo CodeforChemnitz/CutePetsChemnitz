@@ -1,8 +1,9 @@
 {
   "indentation": {
-    "value": 4
+    "value": 2
   },
   "max_line_length": {
+    "value": 140,
     "level": "ignore"
   }
 }
