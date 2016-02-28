@@ -19,7 +19,9 @@ get_notPostedPet = ->
   new Promise (f, r) ->
     cache.getAsync 'posted_pets'
       .then (postedPets) ->
-        postedPets = JSON.parse postedPets | []
+        postedPets = JSON.parse postedPets
+        if postedPets is null
+          postedPets = []
         cache.getAsync ('tiere')
           .then (pets) ->
             pets = JSON.parse pets
