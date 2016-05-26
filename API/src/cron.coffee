@@ -147,6 +147,7 @@ get_data = ->
       data = JSON.stringify(_.union.apply(null, list_of_values))
       cache.setAsync 'tiere', data
         .then ->
+          d = new Date()
           console.info '%s - %s', d.toISOString(), "Set new DataSet"
           cache.quit()
     .catch (err) ->
