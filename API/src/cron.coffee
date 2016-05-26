@@ -27,7 +27,7 @@ get_tierfreunde = (url)->
       if err
         r err
       d = new Date()
-      console.debug '%s - %s: %s', d.toISOString(), "Scraping", url
+      console.info '%s - %s: %s', d.toISOString(), "Scraping", url
       $ = cheerio.load body
       content = $('#content')
       name = content.find('h1').text()
@@ -56,7 +56,7 @@ get_tierfreundeUrls = (url) ->
         r err
       urls = []
       d = new Date()
-      console.debug '%s - %s: %s', d.toISOString(), "Seaching Urls", url
+      console.info '%s - %s: %s', d.toISOString(), "Seaching Urls", url
       $ = cheerio.load body
       $('.teaser-subline').each ->
         elem = $(this)
@@ -70,7 +70,7 @@ get_tierschutz = (url) ->
       if err
         r err
       d = new Date()
-      console.debug '%s - %s: %s', d.toISOString(), "Scraping", url
+      console.info '%s - %s: %s', d.toISOString(), "Scraping", url
       $ = cheerio.load body
       content = $('table')
       name = content.find('.Stil2').text().replace /"/g, ''
@@ -104,7 +104,7 @@ get_tierschutzUrls = (url) ->
         r err
       urls = []
       d = new Date()
-      console.debug '%s - %s: %s', d.toISOString(), "Seaching Urls", url
+      console.info '%s - %s: %s', d.toISOString(), "Seaching Urls", url
       $ = cheerio.load body
       $('td', '#center').each ->
         elem = $(this)

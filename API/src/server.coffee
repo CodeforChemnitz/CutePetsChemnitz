@@ -19,7 +19,7 @@ cache.on 'error', (err) ->
 get_notPostedPet = ->
   new Promise (f, r) ->
     d = new Date()
-    console.debug '%s - %s', d.toISOString(), "Get not posted Pet"
+    console.info '%s - %s', d.toISOString(), "Get not posted Pet"
     cache.getAsync 'posted_pets'
       .then (postedPets) ->
         postedPets = JSON.parse postedPets
@@ -72,4 +72,4 @@ server = app.listen 3000, 'localhost', ->
   host = if host.match /:/ then "[#{host}]" else host
   port = server.address().port
   d = new Date()
-  console.log '%s - Listening at http://%s:%s', d.toISOString(), host, port
+  console.info '%s - Listening at http://%s:%s', d.toISOString(), host, port
