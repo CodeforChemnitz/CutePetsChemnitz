@@ -9,7 +9,9 @@ bluebird.promisifyAll(redis.RedisClient.prototype)
 cache = redis.createClient('/var/run/redis/redis.sock')
 
 cache.on 'error', (err) ->
-  console.error err
+  d = new Date()
+  console.error '%s - %s', d.toISOString(), err
+
 
 tierfreunde_url = "http://www.tierfreunde-helfen.de/index.php?zuhausegesucht-tiere-in-not"
 tierfreunde_splitpos = tierfreunde_url.lastIndexOf '/'
@@ -93,7 +95,6 @@ get_tierschutzUrls = (url) ->
   new Promise (f, r) ->
     request url, (err, response, body) ->
       if err
-        console.error err
         r err
       urls = []
       $ = cheerio.load body
@@ -140,6 +141,7 @@ get_data = ->
         .then ->
           cache.quit()
     .catch (err) ->
-      console.error err
+      d = new Date()
+      console.error '%s - %s', d.toISOString(), err
     
 get_data()

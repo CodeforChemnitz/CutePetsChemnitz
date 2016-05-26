@@ -12,7 +12,8 @@ bluebird.promisifyAll(redis.RedisClient.prototype)
 cache = redis.createClient('/var/run/redis/redis.sock') # Configure Redis
 
 cache.on 'error', (err) ->
-  console.error err
+  d = new Date()
+  console.error '%s - %s', d.toISOString(), err
 
 # get a pet that was not posted yet
 get_notPostedPet = ->
@@ -50,7 +51,8 @@ app.get '/', (req, res) ->
     .then (pets) ->
       res.json JSON.parse(pets)
     .catch (err) ->
-      console.error err
+      d = new Date()
+      console.error '%s - %s', d.toISOString(), err
       res.status(500).json(err)
 
 # Return a random pet
@@ -59,11 +61,13 @@ app.get '/random', (req, res) ->
     .then (pet) ->
       res.json pet
     .catch (err) ->
-      console.error err
+      d = new Date()
+      console.error '%s - %s', d.toISOString(), err
       res.status(500).json(err)
 
 server = app.listen 3000, 'localhost', ->
   host = server.address().address
   host = if host.match /:/ then "[#{host}]" else host
   port = server.address().port
-  console.log 'Listening at http://%s:%s', host, port
+  d = new Date()
+  console.log '%s - Listening at http://%s:%s', d.toISOString(), host, port
