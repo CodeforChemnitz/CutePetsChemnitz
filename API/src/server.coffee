@@ -18,6 +18,7 @@ cache.on 'error', (err) ->
 # get a pet that was not posted yet
 get_notPostedPet = ->
   new Promise (f, r) ->
+    d = new Date()
     console.debug '%s - %s', d.toISOString(), "Get not posted Pet"
     cache.getAsync 'posted_pets'
       .then (postedPets) ->
