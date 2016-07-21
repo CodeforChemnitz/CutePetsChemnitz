@@ -55,7 +55,7 @@
 # SPIN_SLEEP_TIME="2000"
 
 NAME="forever_cutepets"
-NODE_BIN_DIR="/usr/local/bin/node"
+NODE_BIN_DIR="/usr/bin/node"
 NODE_PATH="/usr/local/lib/node_modules:/opt/CutePetsChemnitz/API/node_modules"
 APPLICATION_PATH="/opt/CutePetsChemnitz/API/lib/server.js"
 PIDFILE="/var/run/forever/cutepets.pid"
