@@ -32,7 +32,7 @@ get_tierfreunde = (url)->
       content = $('#content')
       name = content.find('h1').text()
       img = content.find('img').attr('src')
-      pic = tierfreunde_base_url + content.find('img').attr('src')
+      pic = tierfreunde_base_url + img
       id = img.split '.', 1
       id = id[0].split '/'
       content.find('h1').remove()
@@ -75,7 +75,7 @@ get_tierschutz = (url) ->
       content = $('table')
       name = content.find('.Stil2').text().replace /"/g, ''
       img = content.find('img').attr('src')
-      pic = tierschutz_base_url + 'vermittlung/' + content.find('img').attr('src')
+      pic = tierschutz_base_url + 'vermittlung/' + img
       id = img.split '.', 1
       id = id[0].split '/'
       content.find('.Stil2').remove()
